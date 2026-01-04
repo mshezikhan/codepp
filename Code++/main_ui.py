@@ -253,11 +253,11 @@ class NotesApp(
             self.update_status()
             self.render_folders()
 
-            # 5️⃣ Success feedback
-            messagebox.showinfo(
-                "Workspace Replaced",
-                "Workspace replaced successfully."
-            )
+            # # 5️⃣ Success feedback
+            # messagebox.showinfo(
+            #     "Workspace Replaced",
+            #     "Workspace replaced successfully."
+            # )
 
         except Exception as e:
             messagebox.showerror("Invalid File", str(e))
