@@ -25,4 +25,5 @@ if __name__ == "__main__":
             pass
 
         # exit silently
-        sys.exit(0)
+        sys.exit(1)
+
