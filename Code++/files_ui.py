@@ -194,7 +194,7 @@ class FileUIMixin:
         try:
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(export_data, f, indent=4)
-            messagebox.showinfo("Shared", "File exported successfully.")
+            messagebox.showinfo("Exported", "File exported successfully.\nAsk your friend to import this file in Code++.")
         except Exception as e:
             messagebox.showerror("Export Error", str(e))
 
