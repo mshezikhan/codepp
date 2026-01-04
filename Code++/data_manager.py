@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 APP_NAME = "Code++"
 DEFAULT_DIR = os.path.join(os.path.expanduser("~"), "Documents", "Code++")
-DEFAULT_FILE = os.path.join(DEFAULT_DIR, "Code++.codepp")
+DEFAULT_FILE = os.path.join(DEFAULT_DIR, "Code++_Data.codepp")
 
 
 class DataManagerMixin:
