@@ -48,7 +48,10 @@ It is designed as a **developer-focused, offline-first, and student-friendly too
 
 📤 **Easy Import / Export**
 - Export a single file or a whole folder  
-- Share notes easily with friends or classmates  
+- Share notes easily with friends or classmates
+
+💾 **Local Backup**
+- Can take a Local backup to prevent unwanted data loss.  
 
 📲 **WhatsApp-Friendly Sharing**
 - Send exported notes via WhatsApp  
