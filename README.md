@@ -82,10 +82,9 @@ Download releases from the **Releases** section of this repository.
 | Screenshot | Description |
 |----------|-------------|
 | ![Main](screenshots/main.PNG) | Home Window (Folders) |
-| ![Extension](screenshots/extension.PNG) | Files Window |
-| ![Download Settings](screenshots/download.PNG) | File Detail |
-| ![Downloading](screenshots/downloading.PNG) | Create Block Popup |
-| ![Library](screenshots/library.PNG) | Downloaded files library view (with thumbnails) |
+| ![Files](screenshots/files.PNG) | Files Window |
+| ![File Detail](screenshots/file_detail.PNG) | File Detail |
+| ![Add Content](screenshots/add_content.PNG) | Create Block Popup |
 
 ---
 
