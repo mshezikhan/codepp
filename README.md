@@ -20,7 +20,7 @@ It is designed as a **developer-focused, offline-first, and student-friendly too
 
 🔗 Download previous versions from the **Releases** section of this repository.
 
-> [Download Latest Release Now](https://sourceforge.net/projects/codepp/))
+> [Download Latest Release Now](https://sourceforge.net/projects/codepp/)
 
 ---
 
