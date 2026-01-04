@@ -18,10 +18,9 @@ It is designed as a **developer-focused, offline-first, and student-friendly too
 
 ## 💻 Download for Windows
 
-Download releases from the **Releases** section of this repository.
+🔗 Download previous versions from the **Releases** section of this repository.
 
-👉 https://sourceforge.net/projects/code-plus-plus/  
-*(replace with your actual SourceForge link)*
+> [Download Latest Release Now](https://sourceforge.net/projects/codepp/))
 
 ---
 
