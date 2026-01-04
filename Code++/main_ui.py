@@ -200,54 +200,74 @@ class NotesApp(
 
     def load_button_action(self):
         file_path = filedialog.askopenfilename(
-            title="Load Code++ File",
+            title="Replace Workspace",
             filetypes=[("Code++ Files", "*.codepp")]
         )
 
         if not file_path:
             return
 
+        # 🔴 Confirmation (VERY IMPORTANT)
+        confirm = messagebox.askyesno(
+            "Load Code++ File",
+            "This will overwrite your current data.\n\n"
+            "Make sure you have a backup if you want to keep it.\n\n"
+            "Do you want to continue?"
+        )
+
+        if not confirm:
+            return
+
         try:
+            # 1️⃣ Load selected file
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             if "folders" not in data:
                 raise ValueError("Invalid Code++ file")
 
-            self.data = data
-
-            if "meta" not in self.data:
+            # 2️⃣ Ensure meta exists
+            if "meta" not in data:
                 now = datetime.now().isoformat()
-                self.data["meta"] = {
+                data["meta"] = {
                     "app": APP_NAME,
                     "version": "1.0",
                     "created": now,
                     "last_modified": now
                 }
 
-            if "folders" not in self.data:
-                self.data["folders"] = {}
+            if "folders" not in data:
+                data["folders"] = {}
 
-            self.data_path = file_path
-            self.assets_dir = os.path.join(
-                os.path.dirname(self.data_path),
-                "assets",
-                "images"
-            )
-            os.makedirs(self.assets_dir, exist_ok=True)
+            # 3️⃣ OVERWRITE default workspace file
+            with open(DEFAULT_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
 
-            self.save_data()
+            # 4️⃣ Reload app state from default workspace
+            self.data = data
+            self.data_path = DEFAULT_FILE
+
+            self.current_folder = None
+            self.current_file = None
+
             self.update_status()
             self.render_folders()
 
+            # 5️⃣ Success feedback
+            messagebox.showinfo(
+                "Workspace Replaced",
+                "Workspace replaced successfully."
+            )
+
         except Exception as e:
             messagebox.showerror("Invalid File", str(e))
+
 
     def backup_button_action(self):
         file_path = filedialog.asksaveasfilename(
             title="Backup Code++ Data",
             defaultextension=".codepp",
-            initialfile="Code++.codepp",
+            initialfile="Code++_Backup.codepp",
             filetypes=[("Code++ Files", "*.codepp")]
         )
 
