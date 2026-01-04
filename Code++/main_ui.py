@@ -200,7 +200,7 @@ class NotesApp(
 
     def load_button_action(self):
         file_path = filedialog.askopenfilename(
-            title="Replace Workspace",
+            title="Load Code++ File",
             filetypes=[("Code++ Files", "*.codepp")]
         )
 
