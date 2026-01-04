@@ -1,3 +1,8 @@
+import os
+import sys
+import traceback
+
+
 from main_ui import NotesApp
 
 
