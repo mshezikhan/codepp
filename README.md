@@ -100,7 +100,7 @@ Download releases from the **Releases** section of this repository.
 ## ⚙️ Local Setup
 
 ```bash
-git clone https://github.com/mshezikhan/code++.git
+git clone https://github.com/mshezikhan/codepp.git
 cd code++
 python -m venv venv
 venv\Scripts\activate         # For Windows
