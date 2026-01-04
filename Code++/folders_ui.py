@@ -147,10 +147,9 @@ class FolderUIMixin:
         popup = tk.Toplevel(self)
         popup.title("Create Folder")
         popup.geometry("300x180")
-        center_window(popup)
-
         popup.transient(self)
         popup.grab_set()
+        center_window(popup) 
 
         ttk.Label(popup, text="Folder Name").pack(pady=10)
 
