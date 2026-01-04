@@ -53,8 +53,8 @@ It is designed as a **developer-focused, offline-first, and student-friendly too
 💾 **Local Backup**
 - Can take a Local backup to prevent unwanted data loss.  
 
-📲 **WhatsApp-Friendly Sharing**
-- Send exported notes via WhatsApp  
+📲 **Easy Notes Sharing**
+- Send exported notes via WhatsApp/Email  
 - Receiver can import directly into Code++  
 - No setup, no accounts, no formatting issues  
 
