@@ -138,7 +138,7 @@ class FolderUIMixin:
         try:
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(export_data, f, indent=4)
-            messagebox.showinfo("Shared", "Folder exported successfully.")
+            messagebox.showinfo("Exported", "Folder exported successfully.\nAsk your friend to import this folder in Code++.")
         except Exception as e:
             messagebox.showerror("Export Error", str(e))
 
