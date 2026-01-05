@@ -190,22 +190,41 @@ class BlockUIMixin:
             lbl.bind("<Button-1>", open_link)
 
 
-        elif block["type"] == "image":
-            img_path = os.path.join(os.path.dirname(self.data_path), block["content"])
-            try:
-                from PIL import Image, ImageTk
-                img = Image.open(img_path)
-                img.thumbnail((500, 300))
-                photo = ImageTk.PhotoImage(img)
-                lbl = ttk.Label(frame, image=photo)
-                lbl.image = photo
-                lbl.pack(anchor="w")
-            except Exception:
-                content_text = "[Image not found]"
-                txt = tk.Text(frame, height=1, wrap="none", borderwidth=0, highlightthickness=0)
-                txt.insert("1.0", content_text)
-                txt.config(fg="red")
-                txt.pack(anchor="w")
+            elif block["type"] == "image":
+                # 🔹 Small info note (very subtle)
+                ttk.Label(
+                    frame,
+                    text="*Images won’t be shared or backed up.",
+                    font=("Segoe UI", 9, "italic"),
+                    foreground="#6b4e31"
+                ).pack(anchor="w", pady=(0, 4))
+    
+                img_path = os.path.join(os.path.dirname(self.data_path), block["content"])
+                try:
+                    from PIL import Image, ImageTk
+                    img = Image.open(img_path)
+                    img.thumbnail((500, 300))
+                    photo = ImageTk.PhotoImage(img)
+    
+                    lbl = ttk.Label(frame, image=photo)
+                    lbl.image = photo  # keep reference
+                    lbl.pack(anchor="w")
+    
+                    content_text = block["content"]
+    
+                except Exception:
+                    content_text = "[Image not found]"
+                    txt = tk.Text(
+                        frame,
+                        height=1,
+                        wrap="none",
+                        borderwidth=0,
+                        highlightthickness=0,
+                        fg="red"
+                    )
+                    txt.insert("1.0", content_text)
+                    txt.config(state="disabled")
+                    txt.pack(anchor="w")
 
         self.block_widgets.append(
             (frame, (content_text).lower())
@@ -355,3 +374,4 @@ class BlockUIMixin:
             self.render_file_detail()
 
         ttk.Button(popup, text="Add", command=add).pack(pady=10)
+
