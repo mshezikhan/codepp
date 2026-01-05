@@ -256,7 +256,7 @@ class BlockUIMixin:
         ttk.Combobox(
             popup,
             textvariable=type_var,
-            values=["heading", "text", "code", "link", "image"],
+            values=["Heading", "Text", "Code", "Link", "Image"],
             state="readonly"
         ).pack()
 
