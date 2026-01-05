@@ -190,41 +190,42 @@ class BlockUIMixin:
             lbl.bind("<Button-1>", open_link)
 
 
-            elif block["type"] == "image":
-                # 🔹 Small info note (very subtle)
-                ttk.Label(
+        elif block["type"] == "image":
+            # 🔹 Small info note (very subtle)
+            ttk.Label(
+                frame,
+                text="*Images won’t be shared or backed up.",
+                font=("Segoe UI", 9, "italic"),
+                foreground="#6b4e31"
+            ).pack(anchor="w", pady=(0, 4))
+
+            img_path = os.path.join(os.path.dirname(self.data_path), block["content"])
+            try:
+                from PIL import Image, ImageTk
+                img = Image.open(img_path)
+                img.thumbnail((500, 300))
+                photo = ImageTk.PhotoImage(img)
+
+                lbl = ttk.Label(frame, image=photo)
+                lbl.image = photo  # keep reference
+                lbl.pack(anchor="w")
+
+                content_text = block["content"]
+
+            except Exception:
+                content_text = "[Image not found]"
+                txt = tk.Text(
                     frame,
-                    text="*Images won’t be shared or backed up.",
-                    font=("Segoe UI", 9, "italic"),
-                    foreground="#6b4e31"
-                ).pack(anchor="w", pady=(0, 4))
-    
-                img_path = os.path.join(os.path.dirname(self.data_path), block["content"])
-                try:
-                    from PIL import Image, ImageTk
-                    img = Image.open(img_path)
-                    img.thumbnail((500, 300))
-                    photo = ImageTk.PhotoImage(img)
-    
-                    lbl = ttk.Label(frame, image=photo)
-                    lbl.image = photo  # keep reference
-                    lbl.pack(anchor="w")
-    
-                    content_text = block["content"]
-    
-                except Exception:
-                    content_text = "[Image not found]"
-                    txt = tk.Text(
-                        frame,
-                        height=1,
-                        wrap="none",
-                        borderwidth=0,
-                        highlightthickness=0,
-                        fg="red"
-                    )
-                    txt.insert("1.0", content_text)
-                    txt.config(state="disabled")
-                    txt.pack(anchor="w")
+                    height=1,
+                    wrap="none",
+                    borderwidth=0,
+                    highlightthickness=0,
+                    fg="red"
+                )
+                txt.insert("1.0", content_text)
+                txt.config(state="disabled")
+                txt.pack(anchor="w")
+
 
         self.block_widgets.append(
             (frame, (content_text).lower())
@@ -261,7 +262,7 @@ class BlockUIMixin:
 
         ttk.Label(popup, text="Content").pack(pady=5)
         content_box = tk.Text(popup, height=8)
-        content_box.pack(fill="both", padx=20)
+        content_box.pack(fill="both", padx=20, pady=(0, 12))
 
         image_path_var = tk.StringVar()
 
@@ -278,7 +279,7 @@ class BlockUIMixin:
         ttk.Button(popup, text="Choose Image", command=choose_image).pack(pady=5)
 
         def save():
-            block_type = type_var.get()
+            block_type = type_var.get().lower()
 
             if block_type == "image":
                 src = image_path_var.get()
@@ -316,13 +317,13 @@ class BlockUIMixin:
         ttk.Combobox(
             popup,
             textvariable=type_var,
-            values=["heading", "text", "code", "link", "image"],
+            values=["Heading", "Text", "Code", "Link", "Image"],
             state="readonly"
         ).pack()
 
         ttk.Label(popup, text="Content").pack(pady=5)
         content_box = tk.Text(popup, height=8)
-        content_box.pack(fill="both", padx=20)
+        content_box.pack(fill="both", padx=20, pady=(0, 12))
         content_box.focus()
 
         image_path_var = tk.StringVar()
@@ -338,7 +339,7 @@ class BlockUIMixin:
         ttk.Button(popup, text="Choose Image", command=choose_image).pack(pady=5)
 
         def add():
-            block_type = type_var.get()
+            block_type = type_var.get().lower()
             file_data = self.data["folders"][self.current_folder]["files"][self.current_file]
 
             if block_type == "image":
@@ -374,4 +375,3 @@ class BlockUIMixin:
             self.render_file_detail()
 
         ttk.Button(popup, text="Add", command=add).pack(pady=10)
-
