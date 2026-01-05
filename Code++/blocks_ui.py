@@ -252,7 +252,7 @@ class BlockUIMixin:
         popup.grab_set()
 
         ttk.Label(popup, text="Type").pack(pady=5)
-        type_var = tk.StringVar(value=block["type"])
+        type_var = tk.StringVar(value=block["type"].title())
         ttk.Combobox(
             popup,
             textvariable=type_var,
@@ -313,7 +313,7 @@ class BlockUIMixin:
         popup.grab_set()
 
         ttk.Label(popup, text="Type").pack(pady=5)
-        type_var = tk.StringVar(value="heading")
+        type_var = tk.StringVar(value="Heading")
         ttk.Combobox(
             popup,
             textvariable=type_var,
