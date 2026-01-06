@@ -72,8 +72,8 @@ class BlockUIMixin:
         scrollbar.pack(side="right", fill="y")
 
 
-        for block in blocks:
-            self.render_block(scroll_frame, block)
+        for index, block in enumerate(blocks):
+            self.render_block(scroll_frame, block, index)
 
         # -------- BLOCK SEARCH + HIGHLIGHT --------
         def search_in_file(*args):
@@ -97,7 +97,7 @@ class BlockUIMixin:
 
     # ---------------- SINGLE BLOCK ----------------
 
-    def render_block(self, parent, block):
+    def render_block(self, parent, block, index):
         frame = ttk.Frame(parent, padding=10, relief="ridge")
         frame.pack(fill="x", pady=6)
 
@@ -109,6 +109,35 @@ class BlockUIMixin:
             text="",
             font=("Segoe UI", 12, "bold")
         ).pack(side="left", fill="x", expand=True)
+
+
+        file_blocks = self.data["folders"][self.current_folder]["files"][self.current_file]["blocks"]
+
+        # Move Up
+        btn_up = ttk.Button(
+            header_frame,
+            text="↑",
+            width=3,
+            command=lambda i=index: self.move_block(i, -1)
+        )
+        btn_up.pack(side="right", padx=2)
+
+        # Move Down
+        btn_down = ttk.Button(
+            header_frame,
+            text="↓",
+            width=3,
+            command=lambda i=index: self.move_block(i, 1)
+        )
+        btn_down.pack(side="right", padx=2)
+
+        # Disable buttons when needed
+        if index == 0:
+            btn_up.state(["disabled"])
+
+        if index == len(file_blocks) - 1:
+            btn_down.state(["disabled"])
+
 
         ttk.Button(
             header_frame,
@@ -232,6 +261,22 @@ class BlockUIMixin:
         )
 
     # ---------------- BLOCK ACTIONS ----------------
+
+    def move_block(self, index, direction):
+        file_data = self.data["folders"][self.current_folder]["files"][self.current_file]
+        blocks = file_data.get("blocks", [])
+
+        new_index = index + direction
+
+        if new_index < 0 or new_index >= len(blocks):
+            return
+
+        # Swap blocks
+        blocks[index], blocks[new_index] = blocks[new_index], blocks[index]
+
+        self.save_data()
+        self.render_file_detail()
+
 
     def delete_block(self, block):
         if not messagebox.askyesno("Delete Block", "Delete this block permanently?"):
